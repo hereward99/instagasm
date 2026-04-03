@@ -303,6 +303,145 @@
     fill: white; stroke: none;
   }
 
+  /* ── REELS GRID ── */
+  .reel-item {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #1a1210;
+    cursor: pointer;
+  }
+  .reel-item video,
+  .reel-item img.reel-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .reel-item:hover video,
+  .reel-item:hover img.reel-thumb { transform: scale(1.04); }
+
+  .reel-play-badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 20px;
+    padding: 3px 8px 3px 5px;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    pointer-events: none;
+  }
+  .reel-play-badge svg {
+    width: 11px; height: 11px;
+    fill: white; stroke: none;
+  }
+
+  .reel-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #6b5550;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px;
+    background: linear-gradient(135deg, #1e1210, #2a1a18);
+  }
+  .reel-placeholder svg {
+    width: 28px; height: 28px;
+    stroke: #6b5550; fill: none;
+    stroke-width: 1.4;
+  }
+  .reel-placeholder .grid-filename { color: #5a3d38; }
+
+  /* ── VIDEO LIGHTBOX ── */
+  .vlightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    background: rgba(10, 6, 5, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+  }
+  .vlightbox.open { display: flex; }
+
+  .vlb-close {
+    position: absolute;
+    top: 16px; right: 18px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.12);
+    border: none; border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s;
+    z-index: 10;
+  }
+  .vlb-close:hover { background: rgba(255,255,255,0.24); }
+  .vlb-close svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+
+  .vlb-video-wrap {
+    width: 100%;
+    max-width: 380px;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .vlb-video-wrap video {
+    width: 100%;
+    max-height: 82vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+    background: #000;
+  }
+
+  .vlb-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.10);
+    border: none; border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s;
+  }
+  .vlb-arrow:hover { background: rgba(255,255,255,0.22); }
+  .vlb-arrow svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .vlb-prev { left: 4px; }
+  .vlb-next { right: 4px; }
+  .vlb-arrow.hidden { opacity: 0; pointer-events: none; }
+
+  .vlb-counter {
+    position: absolute;
+    bottom: 18px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    letter-spacing: 0.8px;
+  }
+
+  .vlb-meta {
+    position: absolute;
+    bottom: 38px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .vlb-meta-stat {
+    display: flex; align-items: center; gap: 5px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem; font-weight: 600;
+  }
+  .vlb-meta-stat svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); stroke: none; }
+
   /* ── BOTTOM PADDING ── */
   .bottom-pad { height: 48px; }
 
@@ -493,15 +632,15 @@
 
 <!-- TABS -->
 <div class="tabs">
-  <div class="tab active">
+  <div class="tab active" data-tab="posts">
     <svg viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:2;margin-right:4px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
     Grid
   </div>
-  <div class="tab">
+  <div class="tab" data-tab="reels">
     <svg viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:2;margin-right:4px"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
     Reels
   </div>
-  <div class="tab">
+  <div class="tab" data-tab="tagged">
     <svg viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:2;margin-right:4px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     Tagged
   </div>
@@ -509,6 +648,15 @@
 
 <!-- PHOTO GRID -->
 <div class="grid" id="photoGrid">
+</div>
+
+<!-- REELS GRID -->
+<div class="grid" id="reelsGrid" style="display:none;">
+</div>
+
+<!-- TAGGED PLACEHOLDER -->
+<div id="taggedPanel" style="display:none; text-align:center; padding: 48px 20px; color: var(--muted); font-size:0.9rem;">
+  No tagged posts yet.
 </div>
 
 <div class="bottom-pad"></div>
@@ -530,7 +678,7 @@
   </div>
 </nav>
 
-<!-- LIGHTBOX -->
+<!-- PHOTO LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
   <button class="lb-close" id="lbClose" aria-label="Close">
     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -546,6 +694,24 @@
   </button>
   <div class="lb-meta" id="lbMeta"></div>
   <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="vlightbox" id="vlightbox" role="dialog" aria-modal="true">
+  <button class="vlb-close" id="vlbClose" aria-label="Close">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="vlb-arrow vlb-prev" id="vlbPrev" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="vlb-video-wrap">
+    <video id="vlbVideo" controls playsinline></video>
+  </div>
+  <button class="vlb-arrow vlb-next" id="vlbNext" aria-label="Next">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="vlb-meta" id="vlbMeta"></div>
+  <div class="vlb-counter" id="vlbCounter"></div>
 </div>
 
 <script>
@@ -747,11 +913,177 @@
     if (dx > 0 && currentIndex > 0)                showSlide(--currentIndex);
   });
 
-  // Tab switching (cosmetic)
+  // ── REELS DATA ──
+  // Highest number first — reel06 top-left, reel01 bottom-right.
+  // To add a new reel: add an entry at the TOP with the next number.
+  // Videos live in ./videos/ — use .mp4 format.
+  // Thumbnail images (optional) live in ./images/ — e.g. reel06-thumb.jpg
+  const reels = [
+    { file: "reel06.mp4", thumb: "reel06-thumb.jpg", views: "14.2K", comments: "38" },
+    { file: "reel05.mp4", thumb: "reel05-thumb.jpg", views: "9.8K",  comments: "21" },
+    { file: "reel04.mp4", thumb: "reel04-thumb.jpg", views: "22.1K", comments: "74" },
+    { file: "reel03.mp4", thumb: "reel03-thumb.jpg", views: "7.3K",  comments: "15" },
+    { file: "reel02.mp4", thumb: "reel02-thumb.jpg", views: "11.5K", comments: "29" },
+    { file: "reel01.mp4", thumb: "reel01-thumb.jpg", views: "5.6K",  comments: "12" },
+  ];
+
+  // ── BUILD REELS GRID ──
+  const reelsGrid = document.getElementById('reelsGrid');
+
+  reels.forEach((reel, i) => {
+    const item = document.createElement('div');
+    item.className = 'reel-item';
+
+    // Thumbnail image (preferred — avoids loading video data)
+    const thumb = document.createElement('img');
+    thumb.className = 'reel-thumb';
+    thumb.src = reel.thumb ? `./images/${reel.thumb}` : '';
+    thumb.alt = reel.file;
+
+    const placeholder = document.createElement('div');
+    placeholder.className = 'reel-placeholder';
+    placeholder.innerHTML = `
+      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="grid-filename">${reel.file}</div>
+    `;
+    placeholder.style.display = 'none';
+
+    thumb.onerror = () => {
+      thumb.style.display = 'none';
+      placeholder.style.display = 'flex';
+    };
+    if (!reel.thumb) {
+      thumb.style.display = 'none';
+      placeholder.style.display = 'flex';
+    }
+
+    // Play icon badge with view count
+    const badge = document.createElement('div');
+    badge.className = 'reel-play-badge';
+    badge.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>${reel.views}`;
+
+    // Hover overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'grid-overlay';
+    overlay.innerHTML = `
+      <div class="overlay-stat">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        ${reel.views}
+      </div>
+      <div class="overlay-stat">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        ${reel.comments}
+      </div>
+    `;
+    overlay.querySelectorAll('path').forEach(p => p.style.fill = 'white');
+
+    item.appendChild(thumb);
+    item.appendChild(placeholder);
+    item.appendChild(badge);
+    item.appendChild(overlay);
+
+    item.addEventListener('click', () => openVlightbox(i));
+    reelsGrid.appendChild(item);
+  });
+
+  // Partial last row spacers for reels
+  const reelRemainder = reels.length % 3;
+  if (reelRemainder !== 0) {
+    for (let s = 0; s < 3 - reelRemainder; s++) {
+      const spacer = document.createElement('div');
+      spacer.style.cssText = 'aspect-ratio:9/16; visibility:hidden;';
+      reelsGrid.appendChild(spacer);
+    }
+  }
+
+  // ── VIDEO LIGHTBOX ──
+  const vlightbox  = document.getElementById('vlightbox');
+  const vlbVideo   = document.getElementById('vlbVideo');
+  const vlbPrev    = document.getElementById('vlbPrev');
+  const vlbNext    = document.getElementById('vlbNext');
+  const vlbClose   = document.getElementById('vlbClose');
+  const vlbCounter = document.getElementById('vlbCounter');
+  const vlbMeta    = document.getElementById('vlbMeta');
+  let vCurrentIndex = 0;
+
+  function openVlightbox(index) {
+    vCurrentIndex = index;
+    showReel(index);
+    vlightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVlightbox() {
+    vlightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    vlbVideo.pause();
+    vlbVideo.src = '';
+  }
+
+  function showReel(index) {
+    const reel = reels[index];
+    vlbVideo.pause();
+    vlbVideo.src = `./videos/${reel.file}`;
+    vlbVideo.load();
+    vlbVideo.play().catch(() => {});
+
+    vlbPrev.classList.toggle('hidden', index === 0);
+    vlbNext.classList.toggle('hidden', index === reels.length - 1);
+    vlbCounter.textContent = `${index + 1} / ${reels.length}`;
+
+    vlbMeta.innerHTML = `
+      <div class="vlb-meta-stat">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        ${reel.views}
+      </div>
+      <div class="vlb-meta-stat">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        ${reel.comments}
+      </div>
+    `;
+    vlbMeta.querySelectorAll('path').forEach(p => p.style.fill = 'rgba(255,255,255,0.7)');
+  }
+
+  vlbClose.addEventListener('click', closeVlightbox);
+  vlbPrev.addEventListener('click', () => { if (vCurrentIndex > 0) showReel(--vCurrentIndex); });
+  vlbNext.addEventListener('click', () => { if (vCurrentIndex < reels.length - 1) showReel(++vCurrentIndex); });
+  vlightbox.addEventListener('click', (e) => { if (e.target === vlightbox) closeVlightbox(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!vlightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeVlightbox();
+    if (e.key === 'ArrowLeft'  && vCurrentIndex > 0)              showReel(--vCurrentIndex);
+    if (e.key === 'ArrowRight' && vCurrentIndex < reels.length-1) showReel(++vCurrentIndex);
+  });
+
+  let vTouchStartX = 0;
+  vlightbox.addEventListener('touchstart', (e) => { vTouchStartX = e.touches[0].clientX; }, { passive: true });
+  vlightbox.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - vTouchStartX;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0 && vCurrentIndex < reels.length - 1) showReel(++vCurrentIndex);
+    if (dx > 0 && vCurrentIndex > 0)                showReel(--vCurrentIndex);
+  });
+
+  // ── TAB SWITCHING ──
+  const panels = {
+    posts:  document.getElementById('photoGrid'),
+    reels:  document.getElementById('reelsGrid'),
+    tagged: document.getElementById('taggedPanel'),
+  };
+
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
+      const which = tab.dataset.tab;
+      Object.entries(panels).forEach(([key, el]) => {
+        el.style.display = key === which ? '' : 'none';
+      });
+      // Pause any playing video when leaving reels
+      if (which !== 'reels') {
+        vlbVideo.pause();
+      }
     });
   });
 </script>

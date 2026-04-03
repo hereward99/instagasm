@@ -337,89 +337,6 @@
     background: var(--sand);
   }
   .bn-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-  /* ── LIGHTBOX ── */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(20, 14, 12, 0.96);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    touch-action: none;
-  }
-  .lightbox.open { display: flex; }
-
-  .lb-close {
-    position: absolute;
-    top: 16px; right: 18px;
-    width: 36px; height: 36px;
-    background: rgba(255,255,255,0.12);
-    border: none; border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.18s;
-  }
-  .lb-close:hover { background: rgba(255,255,255,0.24); }
-  .lb-close svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; }
-
-  .lb-img-wrap {
-    width: 100%;
-    max-width: 680px;
-    padding: 0 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lb-img-wrap img {
-    width: 100%;
-    max-height: 82vh;
-    object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 8px 48px rgba(0,0,0,0.6);
-    transition: opacity 0.18s ease;
-  }
-
-  .lb-arrow {
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
-    width: 42px; height: 42px;
-    background: rgba(255,255,255,0.10);
-    border: none; border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.18s;
-  }
-  .lb-arrow:hover { background: rgba(255,255,255,0.22); }
-  .lb-arrow svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .lb-prev { left: 10px; }
-  .lb-next { right: 10px; }
-  .lb-arrow.hidden { opacity: 0; pointer-events: none; }
-
-  .lb-counter {
-    position: absolute;
-    bottom: 18px;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.45);
-    font-weight: 500;
-    letter-spacing: 0.8px;
-  }
-
-  .lb-meta {
-    position: absolute;
-    bottom: 38px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  .lb-meta-stat {
-    display: flex; align-items: center; gap: 5px;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.85rem; font-weight: 600;
-  }
-  .lb-meta-stat svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); stroke: none; }
 </style>
 </head>
 <body>
@@ -530,24 +447,6 @@
   </div>
 </nav>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-  <button class="lb-close" id="lbClose" aria-label="Close">
-    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <div class="lb-img-wrap">
-    <img id="lbImg" src="" alt="">
-  </div>
-  <button class="lb-arrow lb-next" id="lbNext" aria-label="Next">
-    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-  <div class="lb-meta" id="lbMeta"></div>
-  <div class="lb-counter" id="lbCounter"></div>
-</div>
-
 <script>
   // ── CONFIG ──
   // To add a new post: increment TOTAL_POSTS by 1 and add an entry
@@ -656,10 +555,6 @@
     item.appendChild(img);
     item.appendChild(placeholder);
     item.appendChild(overlay);
-
-    // Open lightbox on click
-    item.addEventListener('click', () => openLightbox(i));
-
     grid.appendChild(item);
   });
 
@@ -673,79 +568,6 @@
       grid.appendChild(spacer);
     }
   }
-
-  // ── LIGHTBOX ──
-  const lightbox  = document.getElementById('lightbox');
-  const lbImg     = document.getElementById('lbImg');
-  const lbPrev    = document.getElementById('lbPrev');
-  const lbNext    = document.getElementById('lbNext');
-  const lbClose   = document.getElementById('lbClose');
-  const lbCounter = document.getElementById('lbCounter');
-  const lbMeta    = document.getElementById('lbMeta');
-  let currentIndex = 0;
-
-  function openLightbox(index) {
-    currentIndex = index;
-    showSlide(index);
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-    lbImg.src = '';
-  }
-
-  function showSlide(index) {
-    const post = posts[index];
-    lbImg.style.opacity = '0';
-    setTimeout(() => {
-      lbImg.src = post.file ? `./images/${post.file}` : '';
-      lbImg.alt = post.file || '';
-      lbImg.style.opacity = '1';
-    }, 80);
-
-    lbPrev.classList.toggle('hidden', index === 0);
-    lbNext.classList.toggle('hidden', index === posts.length - 1);
-    lbCounter.textContent = `${index + 1} / ${posts.length}`;
-
-    lbMeta.innerHTML = `
-      <div class="lb-meta-stat">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        ${post.likes}
-      </div>
-      <div class="lb-meta-stat">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        ${post.comments}
-      </div>
-    `;
-  }
-
-  lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', () => { if (currentIndex > 0) showSlide(--currentIndex); });
-  lbNext.addEventListener('click', () => { if (currentIndex < posts.length - 1) showSlide(++currentIndex); });
-
-  // Close on backdrop click
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft'  && currentIndex > 0)              showSlide(--currentIndex);
-    if (e.key === 'ArrowRight' && currentIndex < posts.length-1) showSlide(++currentIndex);
-  });
-
-  // Swipe navigation for touch screens
-  let touchStartX = 0;
-  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  lightbox.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) < 40) return;
-    if (dx < 0 && currentIndex < posts.length - 1) showSlide(++currentIndex);
-    if (dx > 0 && currentIndex > 0)                showSlide(--currentIndex);
-  });
 
   // Tab switching (cosmetic)
   document.querySelectorAll('.tab').forEach(tab => {
