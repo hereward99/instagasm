@@ -1,0 +1,228 @@
+/* ════════════════════════════════════════════
+   tagged.css — Tagged feed for @SophieGlowz
+   InstaGasm • Sophie Moreau profile page
+   ════════════════════════════════════════════ */
+
+/* ── FEED WRAPPER ── */
+#taggedPanel {
+  display: none;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 12px 12px 16px;
+  flex-direction: column;
+  gap: 14px;
+}
+#taggedPanel.active {
+  display: flex;
+}
+
+/* ── CARD ── */
+.tagged-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(42,34,32,0.07), 0 4px 16px rgba(42,34,32,0.04);
+  transition: box-shadow 0.2s ease;
+}
+.tagged-card:hover {
+  box-shadow: 0 2px 8px rgba(42,34,32,0.11), 0 8px 28px rgba(42,34,32,0.07);
+}
+
+/* ── CARD HEADER ── */
+.tagged-card-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px 10px;
+}
+
+.tagged-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0e6dd;
+  border: 1.5px solid #edddd5;
+}
+
+.tagged-avatar-fallback {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fce4ec, #f0e6dd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: #c9a99a;
+  border: 1.5px solid #edddd5;
+}
+
+.tagged-account-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tagged-handle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.87rem;
+  color: #2a2220;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tagged-name {
+  font-size: 0.75rem;
+  color: #9e8880;
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+.tagged-type-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.tagged-type-badge.tag {
+  background: #fce4ec;
+  color: #c47fb5;
+}
+.tagged-type-badge.mention {
+  background: #fdf0ea;
+  color: #e8756a;
+}
+
+/* ── CARD IMAGE ── */
+.tagged-img-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f0e6dd;
+  position: relative;
+}
+.tagged-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.tagged-card:hover .tagged-img-wrap img {
+  transform: scale(1.02);
+}
+
+.tagged-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #c9a99a;
+  background: linear-gradient(135deg, #fdf0ea, #fce4ec);
+}
+.tagged-img-placeholder svg {
+  width: 32px;
+  height: 32px;
+  stroke: #c9a99a;
+  fill: none;
+  stroke-width: 1.4;
+}
+.tagged-img-placeholder span {
+  font-size: 0.72rem;
+  color: #c9a99a;
+}
+
+/* ── CARD BODY ── */
+.tagged-card-body {
+  padding: 11px 14px 14px;
+}
+
+.tagged-caption {
+  font-size: 0.855rem;
+  line-height: 1.55;
+  color: #3a2e2b;
+  margin-bottom: 10px;
+}
+
+.tagged-caption .mention-highlight {
+  color: #e8756a;
+  font-weight: 600;
+}
+
+/* ── CARD FOOTER ── */
+.tagged-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 8px;
+  border-top: 1px solid #f5ede8;
+}
+
+.tagged-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #9e8880;
+}
+
+.tagged-stat svg {
+  width: 15px;
+  height: 15px;
+  fill: #c9a99a;
+  stroke: none;
+  flex-shrink: 0;
+}
+
+.tagged-timestamp {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #c9a99a;
+  font-weight: 400;
+}
+
+/* ── LOADING / ERROR STATES ── */
+.tagged-loading,
+.tagged-error {
+  text-align: center;
+  padding: 48px 20px;
+  color: #9e8880;
+  font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.tagged-loading::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid #edddd5;
+  border-top-color: #e8756a;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 400px) {
+  #taggedPanel {
+    padding: 10px 8px 14px;
+    gap: 10px;
+  }
+  .tagged-card-header { padding: 10px 12px 8px; }
+  .tagged-card-body   { padding: 10px 12px 12px; }
+  .tagged-caption     { font-size: 0.82rem; }
+}

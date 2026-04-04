@@ -1,0 +1,114 @@
+[
+  {
+    "id": "t001",
+    "type": "tag",
+    "account": {
+      "handle": "@vanlife.vera",
+      "name": "Vera Callahan",
+      "avatar": "avatars/vera.jpg"
+    },
+    "image": "tagged/t001.jpg",
+    "caption": "Morning flow with my fave instructor 🌅 If you haven't trained with @SophieGlowz you are genuinely missing out. Best energy in the city.",
+    "likes": "847",
+    "comments": "34",
+    "timestamp": "2 days ago"
+  },
+  {
+    "id": "t002",
+    "type": "mention",
+    "account": {
+      "handle": "@coastalfitco",
+      "name": "Coastal Fit Co.",
+      "avatar": "avatars/coastalfitco.jpg"
+    },
+    "image": "tagged/t002.jpg",
+    "caption": "Obsessed with this collab 🤍 @SophieGlowz showing off our new Seabreeze collection at Jericho Beach. Link in bio for 20% off this week only.",
+    "likes": "2.1K",
+    "comments": "112",
+    "timestamp": "5 days ago"
+  },
+  {
+    "id": "t003",
+    "type": "tag",
+    "account": {
+      "handle": "@dani.moves",
+      "name": "Danielle Okafor",
+      "avatar": "avatars/dani.jpg"
+    },
+    "image": "tagged/t003.jpg",
+    "caption": "Convinced @SophieGlowz to try paddleboard yoga with me and she was a NATURAL. Honestly annoying how good she is at everything 😭✨",
+    "likes": "1.3K",
+    "comments": "58",
+    "timestamp": "1 week ago"
+  },
+  {
+    "id": "t004",
+    "type": "mention",
+    "account": {
+      "handle": "@greenroots.cafe",
+      "name": "Green Roots Café",
+      "avatar": "avatars/greenroots.jpg"
+    },
+    "image": "tagged/t004.jpg",
+    "caption": "Our new ceremonial matcha latte has a fan 🍵 Thank you @SophieGlowz for the sweetest shoutout. Come back anytime — your usual is on us 💚",
+    "likes": "673",
+    "comments": "29",
+    "timestamp": "1 week ago"
+  },
+  {
+    "id": "t005",
+    "type": "tag",
+    "account": {
+      "handle": "@pilates.with.priya",
+      "name": "Priya Mehta",
+      "avatar": "avatars/priya.jpg"
+    },
+    "image": "tagged/t005.jpg",
+    "caption": "Guest teaching alongside the incredible @SophieGlowz at Solstice Studio last Thursday. This woman's cues are *chef's kiss*. When's the next one, Soph? 🙏",
+    "likes": "988",
+    "comments": "47",
+    "timestamp": "2 weeks ago"
+  },
+  {
+    "id": "t006",
+    "type": "mention",
+    "account": {
+      "handle": "@yvr.wellness.week",
+      "name": "YVR Wellness Week",
+      "avatar": "avatars/yvrww.jpg"
+    },
+    "image": "tagged/t006.jpg",
+    "caption": "Recap from Day 2 of our pop-up series! Huge thank you to @SophieGlowz for leading sunrise Vinyasa at the Seawall. 400 people. Zero complaints. We'll be back. 🌊",
+    "likes": "3.4K",
+    "comments": "201",
+    "timestamp": "3 weeks ago"
+  },
+  {
+    "id": "t007",
+    "type": "tag",
+    "account": {
+      "handle": "@_mads.in.motion",
+      "name": "Madison Lark",
+      "avatar": "avatars/mads.jpg"
+    },
+    "image": "tagged/t007.jpg",
+    "caption": "Found this from our Bali trip last spring and I'm emotional 😭 Miss training every morning with @SophieGlowz. When are we going back??",
+    "likes": "1.8K",
+    "comments": "93",
+    "timestamp": "1 month ago"
+  },
+  {
+    "id": "t008",
+    "type": "mention",
+    "account": {
+      "handle": "@solstice.studio.yvr",
+      "name": "Solstice Studio YVR",
+      "avatar": "avatars/solstice.jpg"
+    },
+    "image": "tagged/t008.jpg",
+    "caption": "Reminder that @SophieGlowz teaches here every Tuesday and Thursday at 7am 🧘‍♀️ Spots are filling fast — grab yours through the link in bio before they're gone.",
+    "likes": "512",
+    "comments": "38",
+    "timestamp": "1 month ago"
+  }
+]
