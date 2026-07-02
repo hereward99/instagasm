@@ -1198,33 +1198,25 @@
     tagged: document.getElementById('taggedPanel'),
   };
 
-  function switchTab(which) {
-    if (!panels[which]) which = 'posts';
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const which = tab.dataset.tab;
 
-    document.querySelectorAll('.tab').forEach(function(t) {
-      t.classList.toggle('active', t.dataset.tab === which);
+      Object.entries(panels).forEach(([key, el]) => {
+        if (key === 'tagged') {
+          // tagged uses flex via CSS class
+          el.classList.toggle('active', key === which);
+        } else {
+          el.style.display = key === which ? '' : 'none';
+        }
+      });
+
+      if (which !== 'reels') vlbVideo.pause();
+      if (which === 'tagged') loadTaggedFeed();
     });
-
-    Object.keys(panels).forEach(function(key) {
-      var el = panels[key];
-      if (key === 'tagged') {
-        el.classList.toggle('active', key === which);
-      } else {
-        el.style.display = key === which ? '' : 'none';
-      }
-    });
-
-    if (which !== 'reels') vlbVideo.pause();
-    if (which === 'tagged') loadTaggedFeed();
-
-    history.replaceState(null, '', which === 'posts' ? '#' : '#' + which);
-  }
-
-  document.querySelectorAll('.tab').forEach(function(tab) {
-    tab.addEventListener('click', function() { switchTab(tab.dataset.tab); });
   });
-
-  switchTab(location.hash.replace('#', '') || 'posts');
 </script>
 </body>
 </html>
